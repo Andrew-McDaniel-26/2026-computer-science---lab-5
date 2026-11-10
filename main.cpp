@@ -1,8 +1,13 @@
-#include <time.h>
+// Andrew McDaniel, Computer Science, NOV/10/26
+/* this code purpouse is to genorate a randome number and allow the user to guess it within a selected number of trys, after they runout of guesses or guess correctly
+they are given a ranbome messaeg out of ten for winning or lossing and are prompted if they whnat to try again, typing 1 will run the game again, typing 2 will end the program
+and give a record of games lost, won, and total games played*/
+
 #include <stdLib.h>
+#include <time.h>
 #include <iostream>
 
-
+// my prototypes for the random number game
 void winner(int a);
 void lose(int b);
 void playAgain(int c);
@@ -14,6 +19,8 @@ void confirmAgain( int &rep, int &games);
 
 int main()
 {
+
+
 	int c = 0;
 	int b = 0;
 	int a = 0;
@@ -29,24 +36,25 @@ int main()
 		a = 0;
 		b = 0;
 		c = 0;
-
+		// this function roll numbers for the switch statments of the random messeges in wins, lossses, and play Again.
 		numRoll(a,b,c);
 			
-		
+		// Rolls the random number for the game
 		int ranNum = rand() % 100 + 1;
 
-
+		// this is the main function that allows guessing and checks the guesses then displays wins, losses, and higher or lower
 		guessingGame( a, b, ranNum, wins, losses);
-
+		// this function will prompt the useer if they whant ot play again with one of ten messeges selected randomly
 		playAgain(c);
-
+		// this function is what actually allows them to play again
 		confirmAgain(rep ,games);
 
 	} while (rep == 1);
+	// this function out puts the recorde of games won,lost,and total played
 	record(games, wins, losses);
 	return 0;
 }
-
+//this is the definiton for the function that outputs one of ten randomly selected victory messeges
 void winner(int a)
 {
 	switch (a)
@@ -73,7 +81,7 @@ void winner(int a)
 			break;
 	}
 }
-
+// this definition outputs one of ten randomly selected defeat messeges
 void lose(int b)
 {
 	switch (b)
@@ -100,7 +108,7 @@ void lose(int b)
 		break;
 	}
 }
-
+// this is the definition for the function that out puts one of ten randomly selected messeges for asking if the user whats to playagain
 void playAgain(int c)
 {
 	switch (c)
@@ -109,7 +117,7 @@ void playAgain(int c)
 			break;
 		case 2: std::cout << "another round ?" << std::endl;
 			break;
-		case 3: std::cout << "otra vase ?" << std::endl;
+		case 3: std::cout << "otra vez ?" << std::endl;
 			break;
 		case 4: std::cout << "one more game ?" << std::endl;
 			break;
@@ -123,10 +131,11 @@ void playAgain(int c)
 			break;
 		case 9:std::cout << "you can stop whenever you want" << std::endl;
 			break;
-		case 10:std::cout << "just one more then tou can do your work" << std::endl;
+		case 10:std::cout << "just one more then you can do your homework" << std::endl;
 			break;
 	}
 }
+// the def for the function the outputs the recorded wins,losses, and total games played
 void record(int games, int wins, int losses)
 {
 
@@ -134,13 +143,14 @@ void record(int games, int wins, int losses)
 	std::cout << "the number of games won is :" << wins << std::endl;
 	std::cout << "the number of games lost is :" << losses << std::endl;
 }
+// def fro the function that rolls the number to select the messages for wins,losses, and play again
 void numRoll(int &a, int &b, int &c)
 {
 	c = rand() % 10 + 1;
 	b = rand() % 10 + 1;
 	a = rand() % 10 + 1;
 }
-
+// the function def that allows for guessinf then checks the guess and whether or not to continue or stop the current loop and output ether a victory messeg or a defeat message.
 void guessingGame(int a, int b, int ranNum, int &wins, int &losses)
 {
 	int trys;
@@ -162,6 +172,7 @@ void guessingGame(int a, int b, int ranNum, int &wins, int &losses)
 		trys++;
 		if (ranNum == x)
 		{
+			//function that out put one ot ten victory messeges selected randomly
 			winner(a);
 			wins++;
 		}
@@ -181,13 +192,15 @@ void guessingGame(int a, int b, int ranNum, int &wins, int &losses)
 
 	} while (trys <= max && ranNum != x);
 	if (x != ranNum)
-	{
+	{	
+		// out puts one of ten deffeat messeges selected randomly
 		lose(b);
 		losses++;
 	}
 
 	std::cout << "the random number was " << ranNum << std::endl;
 }
+// the function def for the function that determins whether or not to run the loop again
 void confirmAgain(int &rep, int &games)
 {
 	int v;
@@ -204,6 +217,7 @@ void confirmAgain(int &rep, int &games)
 	default: rep = 2;
 		break;
 	}
+
 	games++;
 	
 }
